@@ -1,10 +1,11 @@
 //
-//  WelcomeViewController.swift
+//  SceneDelegate.swift
 //  Flash Chat iOS13
 //
-//  Created by Angela Yu on 21/10/2019.
-//  Copyright © 2019 Angela Yu. All rights reserved.
+//  Created by Petar Iliev on 07/11/2022.
+//  Copyright © 2022 Petar Iliev. All rights reserved.
 //
+
 
 import UIKit
 

@@ -43,14 +43,17 @@ class ChatViewController: UIViewController {
         loadMessages()
     }
     
-    // adds real time update listener to Firestore 
+    // adds real time update listener to Firestore
     func loadMessages() {
-        db.collection(K.FStore.collectionName).addSnapshotListener { querySnapshot, error in
+        db.collection(K.FStore.collectionName)
+            .order(by: K.FStore.dateField)
+            .addSnapshotListener { querySnapshot, error in
+            self.messages = []
             if error != nil {
                 print("Error while retrieving data from Firestore")
                 print(error!.localizedDescription)
             } else {
-                self.messages = []
+   
                 if let documents = querySnapshot?.documents {
                     for document in documents {
                         let documentData = document.data()
@@ -79,7 +82,8 @@ class ChatViewController: UIViewController {
         if let messageBody = messageTextfield.text, let email = Auth.auth().currentUser?.email {
             db.collection(K.FStore.collectionName).addDocument(data: [
                 K.FStore.senderField : email,
-                K.FStore.bodyField : messageBody
+                K.FStore.bodyField : messageBody,
+                K.FStore.dateField : Date().timeIntervalSince1970
             ]) { error in
                 if error != nil {
                     print("Error while saving data to Firestore")

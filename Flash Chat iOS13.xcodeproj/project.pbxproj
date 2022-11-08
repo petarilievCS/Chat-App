@@ -19,6 +19,7 @@
 		7196EA2A19D862CA47954661 /* Pods_Flash_Chat_iOS13.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCED425534B5DC41E2222B75 /* Pods_Flash_Chat_iOS13.framework */; };
 		E652F7902919DCEF002A1A23 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E652F78F2919DCEF002A1A23 /* GoogleService-Info.plist */; };
 		E652F792291AA0D3002A1A23 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = E652F791291AA0D3002A1A23 /* K.swift */; };
+		E652F794291AA673002A1A23 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E652F793291AA673002A1A23 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		CCED425534B5DC41E2222B75 /* Pods_Flash_Chat_iOS13.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flash_Chat_iOS13.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E652F78F2919DCEF002A1A23 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E652F791291AA0D3002A1A23 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
+		E652F793291AA673002A1A23 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Message.swift; path = "Flash Chat iOS13/Message.swift"; sourceTree = SOURCE_ROOT; };
 		FB1151769506EF472D9C54F6 /* Pods-Flash Chat iOS13.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flash Chat iOS13.debug.xcconfig"; path = "Target Support Files/Pods-Flash Chat iOS13/Pods-Flash Chat iOS13.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +111,7 @@
 		0B628194235DF03A00E35CAF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E652F793291AA673002A1A23 /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				0B628179235DEE8100E35CAF /* SceneDelegate.swift in Sources */,
 				0B62818F235DF01000E35CAF /* LoginViewController.swift in Sources */,
 				E652F792291AA0D3002A1A23 /* K.swift in Sources */,
+				E652F794291AA673002A1A23 /* Message.swift in Sources */,
 				0B628191235DF01B00E35CAF /* ChatViewController.swift in Sources */,
 				0B62818D235DF00B00E35CAF /* RegisterViewController.swift in Sources */,
 			);

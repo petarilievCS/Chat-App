@@ -9,11 +9,14 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class ChatViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextfield: UITextField!
+    
+    let db = Firestore.firestore()
     
     var messages: [Message] = [
         Message(sender: "petariliev@utexas.edu", body: "Hey"),
@@ -23,6 +26,10 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // dismiss keyboard when tapping
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         
         // table view population
         tableView.delegate = self
@@ -34,8 +41,26 @@ class ChatViewController: UIViewController {
         navigationItem.hidesBackButton = true
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     @IBAction func sendPressed(_ sender: UIButton) {
         
+        // update database if there's a message and a user
+        if let messageBody = messageTextfield.text, let email = Auth.auth().currentUser?.email {
+            db.collection(K.FStore.collectionName).addDocument(data: [
+                K.FStore.senderField : email,
+                K.FStore.bodyField : messageBody
+            ]) { error in
+                if error != nil {
+                    print("Error while saving data to Firestore")
+                    print(error!)
+                } else {
+                    print("Data successfuly saved to Firestore")
+                }
+            }
+        }
     }
     
     @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {

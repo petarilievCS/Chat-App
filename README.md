@@ -1,6 +1,6 @@
 # Chat-App
 
-iOS application that allows users to craete an account to send messages back and forth. Authentication is done using Firebase Authentication. User data and messages are stored in a Firebase Firestore database. 
+iOS application that allows users to create an account and send messages back and forth. Authentication is done using Firebase Authentication. User data and messages are stored in a Firebase Firestore database. 
 
 # Demo
 

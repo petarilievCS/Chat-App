@@ -43,14 +43,14 @@ class ChatViewController: UIViewController {
         loadMessages()
     }
     
+    // adds real time update listener to Firestore 
     func loadMessages() {
-        messages = []
-        
-        db.collection(K.FStore.collectionName).getDocuments { querySnapshot, error in
+        db.collection(K.FStore.collectionName).addSnapshotListener { querySnapshot, error in
             if error != nil {
                 print("Error while retrieving data from Firestore")
                 print(error!.localizedDescription)
             } else {
+                self.messages = []
                 if let documents = querySnapshot?.documents {
                     for document in documents {
                         let documentData = document.data()

@@ -39,6 +39,34 @@ class ChatViewController: UIViewController {
         // navigation bar customization
         title = K.title
         navigationItem.hidesBackButton = true
+        
+        loadMessages()
+    }
+    
+    func loadMessages() {
+        messages = []
+        
+        db.collection(K.FStore.collectionName).getDocuments { querySnapshot, error in
+            if error != nil {
+                print("Error while retrieving data from Firestore")
+                print(error!.localizedDescription)
+            } else {
+                if let documents = querySnapshot?.documents {
+                    for document in documents {
+                        let documentData = document.data()
+                        if let sender = documentData[K.FStore.senderField] as? String, let body = documentData[K.FStore.bodyField] as? String {
+                            let newMessage = Message(sender: sender, body: body)
+                            self.messages.append(newMessage)
+                            
+                            // update UI
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     @objc func dismissKeyboard() {
@@ -55,7 +83,7 @@ class ChatViewController: UIViewController {
             ]) { error in
                 if error != nil {
                     print("Error while saving data to Firestore")
-                    print(error!)
+                    print(error!.localizedDescription)
                 } else {
                     print("Data successfuly saved to Firestore")
                 }

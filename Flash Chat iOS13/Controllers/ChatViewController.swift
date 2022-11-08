@@ -27,12 +27,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // dismiss keyboard when tapping
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        
         // table view population
-        tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         
@@ -70,10 +65,6 @@ class ChatViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
@@ -119,12 +110,4 @@ extension ChatViewController: UITableViewDataSource {
         return cell
     }
     
-}
-
-// MARK: - UITableViewDelegate
-extension ChatViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-    }
 }

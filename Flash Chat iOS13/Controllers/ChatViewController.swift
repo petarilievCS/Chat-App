@@ -59,6 +59,8 @@ class ChatViewController: UIViewController {
                             // update UI
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
+                                let lastMessage = self.messages.count - 1
+                                self.tableView.scrollToRow(at: IndexPath(row: lastMessage, section: 0), at: .bottom, animated: true)
                             }
                         }
                     }
@@ -81,6 +83,9 @@ class ChatViewController: UIViewController {
                     print(error!.localizedDescription)
                 } else {
                     print("Data successfuly saved to Firestore")
+                    DispatchQueue.main.async {
+                        self.messageTextfield.text = ""
+                    }
                 }
             }
         }
@@ -105,8 +110,24 @@ extension ChatViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let currentMessage = messages[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
-        cell.messageLabel.text = messages[indexPath.row].body
+        cell.messageLabel.text = currentMessage.body
+        
+        // message from current user
+        if currentMessage.sender == Auth.auth().currentUser?.email {
+            cell.leftImageView.isHidden = true
+            cell.rightImageView.isHidden = false
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.lightPurple)
+            cell.messageLabel.textColor = UIColor(named: K.BrandColors.purple)
+        // message from other user
+        } else {
+            cell.rightImageView.isHidden = true
+            cell.leftImageView.isHidden = false
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.purple)
+            cell.messageLabel.textColor = UIColor(named: K.BrandColors.lightPurple)
+        }
+        
         return cell
     }
     

@@ -27,6 +27,7 @@ class ChatViewController: UIViewController {
         // table view population
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         
         // navigation bar customization
         title = K.title
@@ -56,8 +57,8 @@ extension ChatViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
-        cell.textLabel?.text = messages[indexPath.row].body
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
+        cell.messageLabel.text = messages[indexPath.row].body
         return cell
     }
     
